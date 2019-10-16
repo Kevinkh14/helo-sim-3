@@ -1,24 +1,20 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Auth from "./components/Auth"
+import DashBoard from "./components/Dashboard"
+import Form from "./components/Form"
+import Post from "./components/Post"
+import Nav from "./components/Nav"
+import routes from './routes'
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div>
+        <Nav/>
+      </div>
+      {routes}
     </div>
   );
 }
