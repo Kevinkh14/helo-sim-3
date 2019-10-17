@@ -7,9 +7,9 @@ import Post from "./components/Post"
 
 export default (
     <Switch>
-        <Route path ="/" component ={Auth}></Route>
-        <Route path ="/dash" component ={DashBoard}></Route>
-        <Route path = "/post/:postid" component ={Post}></Route>
-        <Route path = "/new" component ={Form}></Route>
+        <Route path ="/" component ={Auth}/>
+        <Route path ="/dash" component ={DashBoard}/>
+        <Route path = "/post/:postid" component ={Post}/>
+        <Route path = "/new" component ={Form}/>
     </Switch>
 )

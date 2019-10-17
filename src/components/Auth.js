@@ -12,7 +12,8 @@ class Auth extends Component{
             username:"",
             password:"",
             redirect: false,
-            triedToClick:false
+            triedToClick:false,
+            serverErrorMessage:""
         }
     }
 
@@ -23,10 +24,38 @@ class Auth extends Component{
     }
 
     handleRegister =()=>{
-        
+        const {username,password,email,avatar} = this.state;
+        if(username!==""&&password!==""&&email!==""){
+            axios.post("/auth/register",{
+                username,password,email,avatar
+            }).then(response =>{
+                this.props.updateUser(username,email,avatar)
+                this.setState({redirect:true})
+            }).catch(err =>{console.log(err)})
+        }else{
+            this.setState({triedToClick:true})
+        }   
+    }
+    handleLogin =()=>{
+        const {username, password} = this.state;
+        if(username === "" && password === "") {
+            this.setState({triedToClick: true});
+        } else {
+            axios.post("/auth/login", {
+                username, password
+            }).then(response => {
+                this.props.updateUser(response.data);
+                this.setState({redirect: true})
+            }).catch(err => {
+                this.setState({serverErrorMessage: err.response.data.error});
+            })
+        }
     }
 
     render(){
+        if(this.state.redirect ===true){
+           return <Redirect to ="/dash"/>
+        }
         return(
             <div className = 'auth'>
                 <div className = 'auth-container'>
@@ -41,12 +70,14 @@ class Auth extends Component{
                         <input name = 'password' onChange ={this.handleChange}></input>
                     </div>
                     <div>
-                        <button>Login</button>
-                        <button>Register</button>
+                        <button onClick ={this.handleLogin}>Login</button>
+                        <button onClick = {this.handleRegister}>Register</button>
                     </div>
                 </div>
             </div>
         )
-    }
+    }   
 }
-export default Auth
+export default  connect (undefined,{
+    updateUser
+})(Auth)
