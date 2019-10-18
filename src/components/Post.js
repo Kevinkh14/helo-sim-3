@@ -1,10 +1,28 @@
 import React,{Component} from 'react'
+import {Link} from 'react-router-dom'
+import axios from 'axios'
 
 class Post extends Component{
+    constructor(){
+        super()
+        this.state ={
+            allPost:""
+        }
+    }
+        componentDidMount(){
+        axios.get(`/api/post/${this.props.match.params.postid}`).then(response=>{
+            console.log(response.data)
+            this.setState({allPost:response.data})
+        })           
+    }
+  
     render(){
         return(
             <div>
-                <h1>Post</h1>
+                <Link to = {`/post/${this.props.postid}`}>
+                    <h1>{this.props.content}</h1>
+                </Link>
+                    <h1>{this.state.allPost}</h1>
             </div>
         )
     }

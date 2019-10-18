@@ -1,0 +1,6 @@
+.DashBoard{
+    height:80vh;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+}

@@ -11,7 +11,9 @@ import routes from './routes'
 function App() {
   return (
     <div className="App">
-      <Nav/>
+      <div>
+        <Nav/>
+      </div>
       {routes}
     </div>
   );

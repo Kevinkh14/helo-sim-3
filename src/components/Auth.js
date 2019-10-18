@@ -1,7 +1,7 @@
 import React,{Component} from 'react'
 import '../styles/Auth.css'
 import axios from 'axios'
-import {Redirect} from "react-router-dom"
+import {Redirect, Link} from "react-router-dom"
 import {connect} from "react-redux"
 import {updateUser} from "../redux/reducer"
 
