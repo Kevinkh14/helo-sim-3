@@ -2,7 +2,7 @@ require('dotenv').config()
 const express = require('express')
 const massive = require('massive')
 const session = require("express-session")
-const {register,login, logout, addPost, getPost, getOnePost} = require("./controller")
+const {register,login, logout, addPost, getPost, getOnePost, getPostByTitle} = require("./controller")
 
 const app = express()
 
@@ -34,7 +34,8 @@ app.get("/auth/logout",logout)
 
 app.post("/api/post",addPost)
 app.get("/api/post",getPost)
-app.get("/api/post:postid",getOnePost)
+// app.get("/api/post/:postid",getOnePost)
+app.get("/api/post/content",getPostByTitle)
 
 
 

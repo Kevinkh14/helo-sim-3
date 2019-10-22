@@ -57,12 +57,19 @@ module.exports ={
             res.status(200).json(posts)
         })
     },
-     getOnePost:function(req,res){
+    //  getOnePost:function(req,res){
+    //     const db = req.app.get('db')
+    //     const postid = +req.params.postid
+    //     db.getPost(postid).then(posts =>{
+    //         res.status(200).json(posts)
+    //         console.log(posts)
+    //     })
+    // },
+    getPostByTitle : async function(req, res){
         const db = req.app.get('db')
-        const postid = +req.params.postid
-        db.forum.getPost(postid).then(posts =>{
-            res.status(200).json(posts)
-            console.log(posts)
-        })
+        const{content} = req.query
+        const posts = await db.getPostByTitle(`${content}%`)
+        res.status(200).json(posts)
+        console.log(posts)
     }
 }

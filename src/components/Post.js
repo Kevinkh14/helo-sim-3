@@ -9,20 +9,17 @@ class Post extends Component{
             allPost:""
         }
     }
-        componentDidMount(){
-        axios.get(`/api/post/${this.props.match.params.postid}`).then(response=>{
-            console.log(response.data)
-            this.setState({allPost:response.data})
-        })           
-    }
+    //     componentDidMount(){
+    //     axios.get(`/api/post/${this.props.match.params.postid}`).then(response=>{
+    //         console.log(response.data)
+    //         this.setState({allPost:response.data})
+    //     })           
+    // }
   
     render(){
         return(
             <div>
-                <Link to = {`/post/${this.props.postid}`}>
-                    <h1>{this.props.content}</h1>
-                </Link>
-                    <h1>{this.state.allPost}</h1>
+                <h1>{this.props.match.params.postid}</h1>
             </div>
         )
     }

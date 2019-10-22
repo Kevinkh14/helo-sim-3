@@ -2,13 +2,15 @@ import React,{Component} from 'react'
 import axios from'axios'
 import Post from './Post'
 import '../styles/dash.css'
+import {Link} from 'react-router-dom'
 
 class DashBoard extends Component{
     constructor(){
         super()
         this.state ={
             content :"",
-            allPost :[]
+            allPost :[],
+            search :""
         }
     }
     componentDidMount(){
@@ -34,20 +36,39 @@ class DashBoard extends Component{
             this.setState({allPost:response.data})
         }) 
     }
+    handleSearchChange =(e)=>{
+        this.setState({search:e.target.value})
+    }
+    searchForPost =()=>{
+        const {search} = this.state
+        axios.get(`/api/post/content?content=${search}`).then(response=>{
+            this.setState({search:response.data})
+            console.log(search)
+        })
+    }
+    
     render(){
         return(
             <div className ='DashBoard'>
                 <div>
+                    <input onChange = {this.handleSearchChange}></input>
+                    <button onClick ={this.searchForPost}>search</button>
+                </div>
+                <div>
                 {this.state.allPost.map((individualPost,index) =>{
-                    console.log(individualPost)
+                    // console.log(individualPost)
                             return(
                                 <>
-                                    <Post
+                                   <Link to = {`/post/${individualPost.id}`}>
+                                     <h1>{individualPost.content}</h1>
+                                    {/* <Post
                                     content ={individualPost.content}
                                     username ={individualPost.username}
                                     postid ={individualPost.id}
                                     update ={this.update}
-                                    />
+                                    /> */}
+                                    
+                                    </Link>
                                 </>
                             )
                         })}
